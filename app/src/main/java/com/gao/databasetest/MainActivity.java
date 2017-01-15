@@ -120,4 +120,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         values.put("price", 23.8);
         mDb.insert("book", null, values);  //插入第一条数据
     }
+
+    //--------------------------我是分割线------------------------------------------------------------------------------------------
+    /**
+     * android 提供了非常方便的API用于数据库操作,不过总会有一些人不习惯去使用这些辅助性的方法,而事更青睐于直接使用SQL 来操作数据库.
+     * android也提供了一系列的方法,可以直接使用SQL语句来完成操作数据库.
+     */
+    //1. 添加数据的方法
+    public void addData2(){
+        mDb.execSQL("insert into book(name,author,pages,price) values(?,?,?,?)",new String[]{"Java,gao,454,16.99"});
+
+        mDb.execSQL("insert into book(name,author,pages,price) values(?,?,?,?)",new String[]{"Android2,gao2,4123,56.6"});
+    }
+
+    //2. 更新数据的方法
+    private void updateData2(){
+        mDb.execSQL("update book set price=? where name=?",new String[]{"10.66","Java"} );
+        mDb.execSQL("update book set name=? where author=?",new String[]{"Android2,gao2222"});
+    }
+
+    //删除数据的方法
+    public void deleteData2(){
+        mDb.execSQL("delete from book where pages >?",new String[]{"1000"});
+    }
+
+    //4. 查询数据的方法
+    public void queryData2(){
+        mDb.rawQuery("select * from book",null);
+    }
 }
